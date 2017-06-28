@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/materialEdit.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+
+body {
+}
+* {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
