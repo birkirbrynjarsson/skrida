@@ -1,8 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
-import { Observable } from 'rxjs';
-import firebase from 'firebase/compat/app';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   standalone: false,
@@ -48,20 +45,14 @@ export class AppComponent implements OnInit {
     storage: ''
   };
 
-  user: Observable<firebase.User | null>;
-  private readonly itemsRef: AngularFireList<any>;
-  msgVal = '';
-
-  constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
-    this.itemsRef = af.list('/items');
-    this.itemsRef.valueChanges().subscribe(snapshot => {
-      this.temp = [...snapshot];
-      this.rows = snapshot;
-    });
-    this.user = this.afAuth.authState;
-  }
+  constructor(private readonly http: HttpClient) {}
 
   ngOnInit(): void {
+    this.http.get<{ items: any[] }>('assets/munaskra.json').subscribe((data) => {
+      this.temp = [data];
+      this.rows = data.items;
+    });
+
     this.columns = [
       { headerTemplate: this.dateHdr, name: 'Dagsetning', prop: 'date', width: 95, canAutoResize: false },
       { headerTemplate: this.idHdr, name: '# ID', prop: 'ID', width: 100, canAutoResize: false },
@@ -155,21 +146,4 @@ export class AppComponent implements OnInit {
     this.table.offset = 0;
   }
 
-  login(): void {
-    this.afAuth.signInAnonymously();
-  }
-
-  logout(): void {
-    this.afAuth.signOut();
-  }
-
-  sendMessage(text: string): void {
-    const message = {
-      message: text,
-      displayName: 'Birkir',
-      email: 'birkir@birkir.is',
-      timestamp: Date.now()
-    };
-    this.itemsRef.push(message);
-  }
 }
