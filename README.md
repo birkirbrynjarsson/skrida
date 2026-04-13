@@ -1,28 +1,55 @@
 # Skrida
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.2.
+Skrida is a filterable and sortable table of all registered findings from the archaeological excavation at Skriðuklaustur.
 
-## Development server
+The goal of the project is to make this excavation data available to anyone who is curious, while also supporting the mobile game experience played at the Skriðuklaustur exhibition and monastery excavation site.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## What The App Does
 
-## Code scaffolding
+- Displays excavation findings in a data table.
+- Supports column-based filtering and global search.
+- Supports sorting and expandable row details.
+- Loads data from a static JSON file included in the app build.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+## Data Source
+
+- Main data file: `src/assets/munaskra.json`
+- The data is bundled into the build output under `assets/munaskra.json`.
+
+## Development
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm start
+```
+
+Open:
+
+```text
+http://localhost:4200/
+```
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Create a production build:
 
-## Running unit tests
+```bash
+npm run build
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Build artifacts are generated in the `dist/` directory.
 
-## Running end-to-end tests
+## Test
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+Run unit tests:
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```bash
+npm test
+```
