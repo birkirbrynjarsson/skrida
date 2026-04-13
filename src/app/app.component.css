@@ -33,4 +33,22 @@ img {
     margin-bottom:12px;
 }
 
+.header-sort-button {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    gap: 0.35rem;
+    margin-top: 0.35rem;
+    padding: 0;
+}
+
+.header-sort-indicator {
+    color: #5f6b7a;
+    font-size: 0.85rem;
+    line-height: 1;
+}
+
 
