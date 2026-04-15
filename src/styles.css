@@ -2,4 +2,50 @@ body {
 }
 * {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 0.9rem;
+}
+
+.ngx-datatable.material.single-selection .datatable-body-row.active, .ngx-datatable.material.single-selection .datatable-body-row.active .datatable-row-group, .ngx-datatable.material.multi-selection .datatable-body-row.active, .ngx-datatable.material.multi-selection .datatable-body-row.active .datatable-row-group, .ngx-datatable.material.multi-click-selection .datatable-body-row.active, .ngx-datatable.material.multi-click-selection .datatable-body-row.active .datatable-row-group {
+  background-color: #6bc6ff;
+  color: #fff;
+}
+.ngx-datatable.material.single-selection .datatable-body-row.active:hover, .ngx-datatable.material.single-selection .datatable-body-row.active:hover .datatable-row-group, .ngx-datatable.material.multi-selection .datatable-body-row.active:hover, .ngx-datatable.material.multi-selection .datatable-body-row.active:hover .datatable-row-group, .ngx-datatable.material.multi-click-selection .datatable-body-row.active:hover, .ngx-datatable.material.multi-click-selection .datatable-body-row.active:hover .datatable-row-group {
+  background-color: #50a1e8;
+  color: #fff;
+}
+.ngx-datatable.material.single-selection .datatable-body-row.active:focus, .ngx-datatable.material.single-selection .datatable-body-row.active:focus .datatable-row-group, .ngx-datatable.material.multi-selection .datatable-body-row.active:focus, .ngx-datatable.material.multi-selection .datatable-body-row.active:focus .datatable-row-group, .ngx-datatable.material.multi-click-selection .datatable-body-row.active:focus, .ngx-datatable.material.multi-click-selection .datatable-body-row.active:focus .datatable-row-group {
+  background-color: #5cb6f2;
+  color: #fff;
+}
+
+.datatable-header-cell-wrapper input.form-control {
+    font-size: .75rem;
+    padding: .25em .5em;
+}
+
+.ngx-datatable.material .datatable-header .datatable-header-cell {
+  flex-shrink: 0;
+  text-align: left;
+  padding: 0.5rem 0.5rem;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.87);
+  vertical-align: bottom;
+  font-size: 12px;
+}
+
+.ngx-datatable.material .datatable-body .datatable-row-detail {
+  background: #f5f5f5;
+  padding: 10px;
+}
+
+.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell {
+  flex-shrink: 0;
+  text-align: left;
+  padding: 0.5rem 0.5rem;
+  vertical-align: top;
+  border-top: 0;
+  color: rgba(0, 0, 0, 0.87);
+  transition: width 0.3s ease;
+  font-size: 14px;
+  font-weight: 400;
 }

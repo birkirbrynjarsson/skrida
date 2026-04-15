@@ -60,9 +60,11 @@
     [rows]="rows"
     [columns]="columns"
     [columnMode]="'force'"
-    [headerHeight]="50"
+    [loadingIndicator]="loading"
     [footerHeight]="50"
-    [rowHeight]="50"
+    [headerHeight]="60"
+    rowHeight="auto"
+    [selectionType]="SelectionType.single"
     [limit]="100"
     [scrollbarH]="true"
     (page)="onPage($event)"
@@ -70,11 +72,7 @@
     class="material striped"
   >
     <!-- Row Detail Template -->
-    <ngx-datatable-row-detail
-      #myDetailRow
-      [rowHeight]="120"
-      (toggle)="onDetailToggle($event)"
-    >
+    <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow>
       <ng-template let-row="row" ngx-datatable-row-detail-template>
         <div style="padding-left: 10px">
           <div><strong>Lýsing: </strong>{{ row.description }}</div>
@@ -109,12 +107,7 @@
         (keyup)="filterText($event)"
       />
       <button class="header-sort-button" type="button" (click)="sort()">
-        <span class="datatable-header-cell-label draggable">
-          {{ column.name }}
-        </span>
-        <span class="header-sort-indicator">{{
-          sortDir === "asc" ? "▲" : sortDir === "desc" ? "▼" : "↕"
-        }}</span>
+        {{ column.name }}
       </button>
     </span>
   </ng-template>
@@ -138,9 +131,6 @@
         <span class="datatable-header-cell-label draggable">
           {{ column.name }}
         </span>
-        <span class="header-sort-indicator">{{
-          sortDir === "asc" ? "▲" : sortDir === "desc" ? "▼" : "↕"
-        }}</span>
       </button>
     </span>
   </ng-template>
@@ -164,9 +154,6 @@
         <span class="datatable-header-cell-label draggable">
           {{ column.name }}
         </span>
-        <span class="header-sort-indicator">{{
-          sortDir === "asc" ? "▲" : sortDir === "desc" ? "▼" : "↕"
-        }}</span>
       </button>
     </span>
   </ng-template>
@@ -190,9 +177,6 @@
         <span class="datatable-header-cell-label draggable">
           {{ column.name }}
         </span>
-        <span class="header-sort-indicator">{{
-          sortDir === "asc" ? "▲" : sortDir === "desc" ? "▼" : "↕"
-        }}</span>
       </button>
     </span>
   </ng-template>
@@ -216,9 +200,6 @@
         <span class="datatable-header-cell-label draggable">
           {{ column.name }}
         </span>
-        <span class="header-sort-indicator">{{
-          sortDir === "asc" ? "▲" : sortDir === "desc" ? "▼" : "↕"
-        }}</span>
       </button>
     </span>
   </ng-template>
@@ -242,9 +223,6 @@
         <span class="datatable-header-cell-label draggable">
           {{ column.name }}
         </span>
-        <span class="header-sort-indicator">{{
-          sortDir === "asc" ? "▲" : sortDir === "desc" ? "▼" : "↕"
-        }}</span>
       </button>
     </span>
   </ng-template>
@@ -268,9 +246,6 @@
         <span class="datatable-header-cell-label draggable">
           {{ column.name }}
         </span>
-        <span class="header-sort-indicator">{{
-          sortDir === "asc" ? "▲" : sortDir === "desc" ? "▼" : "↕"
-        }}</span>
       </button>
     </span>
   </ng-template>
@@ -294,9 +269,6 @@
         <span class="datatable-header-cell-label draggable">
           {{ column.name }}
         </span>
-        <span class="header-sort-indicator">{{
-          sortDir === "asc" ? "▲" : sortDir === "desc" ? "▼" : "↕"
-        }}</span>
       </button>
     </span>
   </ng-template>
@@ -320,9 +292,6 @@
         <span class="datatable-header-cell-label draggable">
           {{ column.name }}
         </span>
-        <span class="header-sort-indicator">{{
-          sortDir === "asc" ? "▲" : sortDir === "desc" ? "▼" : "↕"
-        }}</span>
       </button>
     </span>
   </ng-template>
@@ -343,12 +312,7 @@
         (keyup)="filterText($event)"
       />
       <button class="header-sort-button" type="button" (click)="sort()">
-        <span class="datatable-header-cell-label draggable">
-          {{ column.name }}
-        </span>
-        <span class="header-sort-indicator">{{
-          sortDir === "asc" ? "▲" : sortDir === "desc" ? "▼" : "↕"
-        }}</span>
+        {{ column.name }}
       </button>
     </span>
   </ng-template>

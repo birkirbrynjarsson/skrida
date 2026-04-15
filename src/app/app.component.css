@@ -43,6 +43,7 @@ img {
     gap: 0.35rem;
     margin-top: 0.35rem;
     padding: 0;
+    font-weight: bolder;
 }
 
 .header-sort-indicator {
@@ -51,4 +52,6 @@ img {
     line-height: 1;
 }
 
-
+ngx-datatable.ngx-datatable.material {
+    box-shadow: none;
+}

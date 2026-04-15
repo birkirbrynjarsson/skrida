@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { SelectionType } from '@swimlane/ngx-datatable';
 
 @Component({
   standalone: false,
@@ -10,22 +11,24 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent implements OnInit {
 
   @ViewChild('myTable') table: any;
-  @ViewChild('dateHdr') dateHdr!: TemplateRef<any>;
-  @ViewChild('idHdr') idHdr!: TemplateRef<any>;
-  @ViewChild('objectHdr') objectHdr!: TemplateRef<any>;
-  @ViewChild('descHdr') descHdr!: TemplateRef<any>;
-  @ViewChild('xHdr') xHdr!: TemplateRef<any>;
-  @ViewChild('yHdr') yHdr!: TemplateRef<any>;
-  @ViewChild('altHdr') altHdr!: TemplateRef<any>;
-  @ViewChild('zoneHdr') zoneHdr!: TemplateRef<any>;
-  @ViewChild('layerHdr') layerHdr!: TemplateRef<any>;
-  @ViewChild('regHdr') regHdr!: TemplateRef<any>;
+  @ViewChild('dateHdr', { static: true }) dateHdr!: TemplateRef<any>;
+  @ViewChild('idHdr', { static: true }) idHdr!: TemplateRef<any>;
+  @ViewChild('objectHdr', { static: true }) objectHdr!: TemplateRef<any>;
+  @ViewChild('descHdr', { static: true }) descHdr!: TemplateRef<any>;
+  @ViewChild('xHdr', { static: true }) xHdr!: TemplateRef<any>;
+  @ViewChild('yHdr', { static: true }) yHdr!: TemplateRef<any>;
+  @ViewChild('altHdr', { static: true }) altHdr!: TemplateRef<any>;
+  @ViewChild('zoneHdr', { static: true }) zoneHdr!: TemplateRef<any>;
+  @ViewChild('layerHdr', { static: true }) layerHdr!: TemplateRef<any>;
+  @ViewChild('regHdr', { static: true }) regHdr!: TemplateRef<any>;
 
   rows: any[] = [];
-  temp: any[] = [];
+  allRows: any[] = [];
   columns: any[] = [];
   expanded: any = {};
   timeout?: ReturnType<typeof setTimeout>;
+  loading = true;
+  SelectionType = SelectionType;
 
   // FilterInputs
   filters = {
@@ -49,13 +52,14 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.get<{ items: any[] }>('assets/munaskra.json').subscribe((data) => {
-      this.temp = [data];
+      this.allRows = data.items;
       this.rows = data.items;
+      this.loading = false;
     });
 
     this.columns = [
       { headerTemplate: this.dateHdr, name: 'Dagsetning', prop: 'date', width: 95, canAutoResize: false },
-      { headerTemplate: this.idHdr, name: '# ID', prop: 'ID', width: 100, canAutoResize: false },
+      { headerTemplate: this.idHdr, name: '# ID', prop: 'ID', width: 110, canAutoResize: false },
       { headerTemplate: this.objectHdr, name: 'Munur', prop: 'object', minWidth: 100, canAutoResize: true },
       { headerTemplate: this.descHdr, name: 'Lýsing', prop: 'description', minWidth: 100, canAutoResize: true },
       { headerTemplate: this.xHdr, prop: 'x', width: 60, canAutoResize: false },
@@ -77,19 +81,13 @@ export class AppComponent implements OnInit {
   }
 
   onActivate(event: any): void {
-    // console.log(event);
     if (event.type === 'click' || event.event?.key === 'Enter') {
       this.table.rowDetail.toggleExpandRow(event.row);
     }
   }
 
   toggleExpandRow(row: any): void {
-    // console.log('Toggled Expand Row!', row);
     this.table.rowDetail.toggleExpandRow(row);
-  }
-
-  onDetailToggle(event: any): void {
-    console.log('Detail Toggled', event);
   }
 
   private fieldContains(data: any, field: string, filterValue: string): boolean {
@@ -101,12 +99,21 @@ export class AppComponent implements OnInit {
   }
 
   filterText(_event: Event): void {
+    // Convert filter values to lowercase for case-insensitive comparison
     for (const key of Object.keys(this.filters)) {
       const current = this.filters[key as keyof typeof this.filters];
       this.filters[key as keyof typeof this.filters] = current.toLowerCase();
     }
 
-    const filtered = this.temp.filter((data: any) => {
+    // Check if all filters are empty
+    const allFiltersEmpty = Object.values(this.filters).every((value) => !value);
+    if (allFiltersEmpty) {
+      this.rows = this.allRows;
+      this.table.offset = 0;
+      return;
+    }
+
+    this.rows = this.allRows.filter((data: any) => {
       const regFilterMatch =
         !this.filters.registrationID ||
         this.fieldContains(data, 'registration', this.filters.registrationID) ||
@@ -142,7 +149,6 @@ export class AppComponent implements OnInit {
       );
     });
 
-    this.rows = filtered;
     this.table.offset = 0;
   }
 
