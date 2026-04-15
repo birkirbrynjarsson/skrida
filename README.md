@@ -46,10 +46,3 @@ npm run build
 
 Build artifacts are generated in the `dist/` directory.
 
-## Test
-
-Run unit tests:
-
-```bash
-npm test
-```
