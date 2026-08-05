@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://skriduklaustur.birkir.is/sitemap.xml

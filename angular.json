@@ -29,6 +29,38 @@
               {
                 "glob": "favicon.ico",
                 "input": "src"
+              },
+              {
+                "glob": "favicon.svg",
+                "input": "src"
+              },
+              {
+                "glob": "apple-touch-icon.png",
+                "input": "src"
+              },
+              {
+                "glob": "icon-192.png",
+                "input": "src"
+              },
+              {
+                "glob": "icon-512.png",
+                "input": "src"
+              },
+              {
+                "glob": "og-image.png",
+                "input": "src"
+              },
+              {
+                "glob": "site.webmanifest",
+                "input": "src"
+              },
+              {
+                "glob": "robots.txt",
+                "input": "src"
+              },
+              {
+                "glob": "sitemap.xml",
+                "input": "src"
               }
             ],
             "styles": [
